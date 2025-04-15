@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course List</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">CourseHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">All Courses</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="courseDropdown" role="button" data-bs-toggle="dropdown">
+                            Categories
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#web-dev">Web Development</a></li>
+                            <li><a class="dropdown-item" href="#data-science">Data Science</a></li>
+                            <li><a class="dropdown-item" href="#ml-dl">AI & Machine Learning</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <a href="/admin" class="btn btn-primary ms-3">Admin</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1 class="text-center text-primary">List of All Courses</h1>
+
+        <h2 id="web-dev" class="mt-4">Web Development</h2>
+        <table class="table table-hover table-bordered">
+            <thead class="table-dark">
+                <tr><th>ID</th><th>Title</th><th>Description</th><th>Duration</th><th>Image</th><th>Details</th></tr>
+            </thead>
+            <tbody>
+                {% for t in allcourses %}
+                {% if t.title == "Web lab" or t.title == "Git and GitHub" %}
+                <tr>
+                    <td>{{ t.id }}</td>
+                    <td>{{ t.title }}</td>
+                    <td>{{ t.description }}</td>
+                    <td>{{ t.duration }}</td>
+                    <td><img src="{{ t.thumbnail.url }}" width="100" class="img-thumbnail"></td>
+                    <td><a href="{% url 'course_details' t.id %}" class="btn btn-info btn-sm">View Details</a></td> 
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2 id="data-science" class="mt-4">Data Science</h2>
+        <table class="table table-hover table-bordered">
+            <thead class="table-dark">
+                <tr><th>ID</th><th>Title</th><th>Description</th><th>Duration</th><th>Image</th><th>Details</th></tr>
+            </thead>
+            <tbody>
+                {% for t in allcourses %}
+                {% if t.title == "Python Basics" %}
+                <tr>
+                    <td>{{ t.id }}</td>
+                    <td>{{ t.title }}</td>
+                    <td>{{ t.description }}</td>
+                    <td>{{ t.duration }}</td>
+                    <td><img src="{{ t.thumbnail.url }}" width="100" class="img-thumbnail"></td>
+                    <td><a href="{% url 'course_details' t.id %}" class="btn btn-info btn-sm">View Details</a></td> 
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2 id="ml-dl" class="mt-4">AI & Machine Learning</h2>
+        <table class="table table-hover table-bordered">
+            <thead class="table-dark">
+                <tr><th>ID</th><th>Title</th><th>Description</th><th>Duration</th><th>Image</th><th>Details</th></tr>
+            </thead>
+            <tbody>
+                {% for t in allcourses %}
+                {% if t.title == "Introduction to Machine Learning with Python" %}
+                <tr>
+                    <td>{{ t.id }}</td>
+                    <td>{{ t.title }}</td>
+                    <td>{{ t.description }}</td>
+                    <td>{{ t.duration }}</td>
+                    <td><img src="{{ t.thumbnail.url }}" width="100" class="img-thumbnail"></td>
+                    <td><a href="{% url 'course_details' t.id %}" class="btn btn-info btn-sm">View Details</a></td> 
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
